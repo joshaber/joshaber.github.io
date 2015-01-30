@@ -1,0 +1,27 @@
+# Dependencies
+markdown:            kramdown
+highlighter:         pygments
+
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           pretty
+relative_permalinks: true
+
+# Setup
+title:               joshaber
+tagline:             'pretty damn pretentious'
+description:         ''
+url:                 http://joshaber.github.io
+baseurl:             /
+paginate:            5
+
+# About/contact
+author:
+  name:              Josh Abernathy
+  twitter:           joshaber
+  url:               https://twitter.com/joshaber
+  email:             joshaber@gmail.com
+
+# Custom vars
+version:             1.0.0

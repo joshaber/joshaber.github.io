@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>joshaber</title>
+ <link href="http://joshaber.github.io/atom.xml" rel="self"/>
+ <link href="http://joshaber.github.io/"/>
+ <updated>2015-01-30T12:22:39-05:00</updated>
+ <id>http://joshaber.github.io</id>
+ <author>
+   <name>Josh Abernathy</name>
+   <email>joshaber@gmail.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>Why React Native Matters</title>
+   <link href="http://joshaber.github.io/2015/01/30/why-react-native-matters/"/>
+   <updated>2015-01-30T00:00:00-05:00</updated>
+   <id>http://joshaber.github.io/2015/01/30/why-react-native-matters</id>
+   <content type="html">&lt;p&gt;A couple days ago Facebook announced React Native, a version of &lt;a href=&quot;http://facebook.github.io/react/&quot;&gt;React&lt;/a&gt; that outputs native views instead of a DOM.&lt;/p&gt;
+
+&lt;p&gt;This is fantastic news for us native developers. But before we get to why, let’s dispell a couple concerns.&lt;/p&gt;
+
+&lt;h3 id=&quot;react-native-isnt-just-another-titanium-or-phonegap&quot;&gt;React Native isn’t just another Titanium or PhoneGap.&lt;/h3&gt;
+
+&lt;p&gt;React Native is &lt;strong&gt;not&lt;/strong&gt; a write-once-run-everywhere solution. The phrase Facebook has used so far is “learn-once-write-everywhere.” They’re interested in sharing the paradigm of React across platforms, not the code necessarily.&lt;/p&gt;
+
+&lt;h3 id=&quot;javascript-is-an-implementation-detail&quot;&gt;JavaScript is an implementation detail.&lt;/h3&gt;
+
+&lt;p&gt;Don’t get distracted by the use of JavaScript. JavaScript is just a language. There are plenty of &lt;a href=&quot;http://www.purescript.org&quot;&gt;other&lt;/a&gt;, &lt;a href=&quot;http://www.typescriptlang.org&quot;&gt;better&lt;/a&gt; languages that can be compiled to JavaScript.&lt;/p&gt;
+
+&lt;p&gt;The important thing about React Native is the &lt;em&gt;idea&lt;/em&gt; behind it.&lt;/p&gt;
+
+&lt;h3 id=&quot;react-lets-us-write-our-uis-as-a-pure-function-of-their-state&quot;&gt;React lets us write our UIs as a pure function of their state.&lt;/h3&gt;
+
+&lt;p&gt;This is a big, important idea.&lt;/p&gt;
+
+&lt;p&gt;Right now we write UIs by poking at them, manually mutating their properties when something changes, adding and removing views, etc. This is fragile and error-prone. &lt;a href=&quot;https://github.com/ReactiveCocoa/ReactiveCocoa&quot;&gt;Some tools&lt;/a&gt; exist to lessen the pain, but they can only go so far. UIs are big, messy, mutable, stateful bags of sadness.&lt;/p&gt;
+
+&lt;p&gt;React let us describe our entire UI for a given state, and then it does the hard work of figuring out what needs to change. It abstracts all the fragile, error-prone code out away from us. We describe what we want, React figures out how to accomplish it.&lt;/p&gt;
+
+&lt;p&gt;UIs become composable, immutable, stateless value types. React Native is fantastic news.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Input and Output</title>
+   <link href="http://joshaber.github.io/2013/02/11/input-and-output/"/>
+   <updated>2013-02-11T00:00:00-05:00</updated>
+   <id>http://joshaber.github.io/2013/02/11/input-and-output</id>
+   <content type="html">&lt;p&gt;Programs take input and produce output. The output is the result of doing something with the input. Input, transform, output, done.&lt;/p&gt;
+
+&lt;p&gt;This pattern is easy to see when the program is a UNIX tool. Take a string, count the words, print out the result. But it’s a lot harder to see when we’re writing an iOS app with a UI, lots of different features, periodic tasks, etc.&lt;/p&gt;
+
+&lt;p&gt;What’s the input and output?&lt;/p&gt;
+
+&lt;p&gt;The input is all the sources of action for your app. It’s taps. It’s keyboard events. It’s timer triggers, GPS events, and web service responses. These things are all inputs. They all feed into the app, and the app combines them all in some way to produce a result: the output.&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;The output is often a change in the app’s UI. A switch is toggled or a list gets a new item. Or it could be more than that. It could be a new file on the device’s disk, or it could be an API request. These things are the outputs of the app.&lt;/p&gt;
+
+&lt;p&gt;But unlike the classic input/output design, this input and output happens more than once. It’s not just a single input → work → output—the cycle continues while the app is open. The app is always consuming inputs and producing outputs based on them.&lt;/p&gt;
+
+&lt;p&gt;To put it another way, the output at any one time is the result of combining all inputs. The output is a &lt;em&gt;function&lt;/em&gt; of all inputs up to that time.&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;So &lt;strong&gt;why should we care?&lt;/strong&gt; Because fresh perspectives are powerful and good and necessary and cool. And in this case, it gives us a fantastic new tool.&lt;/p&gt;
+
+&lt;h3 id=&quot;state&quot;&gt;State&lt;/h3&gt;
+
+&lt;p&gt;There’s no intrinsic idea of state from this perspective. There’s just a change in an input resulting in a new output. State might be an implementation detail with how the app handles its inputs, but it’s not necessary. It’s not intrinsic to the idea.&lt;/p&gt;
+
+&lt;p&gt;Most problems worth solving have some intrinsic state. State &lt;em&gt;can&lt;/em&gt; be essential. But that’s not how we treat it. We solve everything with state. Because we treat all the inputs to our app as different things—a touch event here, a web response there—we can’t combine them in any meaningful way. We can’t transform them uniformly. And so our only tool for dealing with all these different things is state. When our only tool is state, every problem looks like a stateful nail.&lt;/p&gt;
+
+&lt;p&gt;State is bad. State introduces complexity. And worse, it introduces complexity that grows more than linearly with the size of our app.&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; We’re in the habit of constantly introducing more state into our app. New feature? New state. New complexity. New bugs.&lt;sup id=&quot;fnref:4&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;But happily this perspective of our app’s output as a function of its inputs over time gives us a new tool: functional reactive programming. Functional reactive programming (FRP) is a paradigm built around the idea of time-varying values produced by time-varying functions.&lt;/p&gt;
+
+&lt;h3 id=&quot;time&quot;&gt;Time&lt;/h3&gt;
+
+&lt;p&gt;“Time-varying values” might sound like a bit of sleight-of-hand. Isn’t that just another way of saying “state?” They’re both trying to capture the same idea—that things change as the program runs. But by formalizing and reifying time variance, we can reason about change safely.&lt;/p&gt;
+
+&lt;p&gt;Time-varying values can be derived from other time-varying values, which are themselves derived from the time-varying inputs to the app. So while traditional state places the burden of ensuring our app is always in a known consistent state on us, the programmers, FRP lets us define our app in terms of the time-varying values and ensures changes propagate as needed.&lt;/p&gt;
+
+&lt;p&gt;Before, state was discrete pieces of data all moving independently. But time-varying values are cogs all fitting together in a gear. When one turns, it turns all its connected cogs, which turns their cogs, which turns… and ends up running the entire mechanism all by themselves.&lt;/p&gt;
+
+&lt;p&gt;It’s beautiful.&lt;sup id=&quot;fnref:5&quot;&gt;&lt;a href=&quot;#fn:5&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;There are a lot of other things that behave like time-varying values. The result of asynchronous work is really just a time-varying value that only has a value once the work is done.&lt;sup id=&quot;fnref:6&quot;&gt;&lt;a href=&quot;#fn:6&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt; Or a UI element’s value could be seen as a time-varying value that changes as the user interacts with it. If my app is running on a mobile device, the device’s GPS coordinates is a time-varying value.&lt;/p&gt;
+
+&lt;p&gt;It’s all time-varying values, all the way down.&lt;sup id=&quot;fnref:7&quot;&gt;&lt;a href=&quot;#fn:7&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt; State, inputs, and outputs.&lt;/p&gt;
+
+&lt;h3 id=&quot;functional-reactive-programming&quot;&gt;Functional Reactive Programming&lt;/h3&gt;
+
+&lt;p&gt;As the &lt;em&gt;functional&lt;/em&gt; in “functional reactive programming” suggests, FRP comes from functional programming languages.&lt;/p&gt;
+
+&lt;p&gt;Haskell has a &lt;a href=&quot;http://www.haskell.org/haskellwiki/Functional_Reactive_Programming&quot;&gt;number of implementations&lt;/a&gt;, with varying levels of completeness and usability.&lt;/p&gt;
+
+&lt;p&gt;Racket, a Lisp-y language, has &lt;a href=&quot;http://docs.racket-lang.org/frtime/&quot;&gt;FrTime&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There’ve also been a number of interpretations for imperative languages. The 900lb gorilla is the &lt;a href=&quot;http://msdn.microsoft.com/en-us/data/gg577609.aspx&quot;&gt;Reactive Extensions&lt;/a&gt; (Rx) from Microsoft. It’s the first compelling example of how to bring the principles of FRP to an imperative language.&lt;/p&gt;
+
+&lt;p&gt;Netflix &lt;a href=&quot;http://techblog.netflix.com/2013/02/rxjava-netflix-api.html&quot;&gt;re-implemented Rx&lt;/a&gt; on the JVM. They have &lt;a href=&quot;https://github.com/Netflix/RxJava/tree/master/language-adaptors&quot;&gt;adapters&lt;/a&gt; for Clojure, Scala, Groovy, and JRuby.&lt;/p&gt;
+
+&lt;p&gt;There are a few different FRP-inspired libraries for Javascript. Microsoft has &lt;a href=&quot;https://github.com/Reactive-Extensions/RxJS&quot;&gt;RxJS&lt;/a&gt; and there’s also &lt;a href=&quot;http://www.flapjax-lang.org/&quot;&gt;Flapjax&lt;/a&gt;, and &lt;a href=&quot;https://github.com/raimohanska/bacon.js&quot;&gt;BaconJS&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://elm-lang.org/&quot;&gt;Elm&lt;/a&gt; is a Haskell-like language that compiles to JavaScript. It’s the most beautiful, practical FRP implementation I’ve seen.&lt;/p&gt;
+
+&lt;p&gt;Last but not least, myself and some of the other fine folks at GitHub brought Rx to Objective-C: &lt;a href=&quot;https://github.com/ReactiveCocoa/ReactiveCocoa&quot;&gt;ReactiveCocoa&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;example&quot;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;Let’s take a quick look at how this works out practically. FRP is most beautiful in a functional language, but sadly most of us don’t do our everyday work in a functional language.&lt;/p&gt;
+
+&lt;p&gt;Let’s suppose we’re writing an iOS app. We’re going to use ReactiveCocoa to implement a Create Account view. The user will enter their first name, last name, and email (and we’ll make them re-enter their email just to be annoying) and there will be a Create button for them to tap.&lt;/p&gt;
+
+&lt;p&gt;Think in terms of inputs and output. What are the inputs to the view? Obviously the user will input their information. And then they’ll tap the Create button. That’s it. Those are all the inputs to our view. Our outputs should be defined in terms of them.&lt;/p&gt;
+
+&lt;p&gt;There will be a number of outputs in the form of UI changes. The Create button should only be enabled once the user has entered values for first name, last name, and the email and re-enter email fields match.&lt;/p&gt;
+
+&lt;p&gt;If we were writing this traditionally, we’d update the Create button manually whenever we detected that our form changed:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objc&quot; data-lang=&quot;objc&quot;&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;createButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enabled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isFormValid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;But what we really want to do is declare the relationship between the form’s validity and the Create button’s enabledness across the entire lifetime of the view.&lt;/p&gt;
+
+&lt;p&gt;We want to derive our output from our input. ReactiveCocoa lets us do that:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objc&quot; data-lang=&quot;objc&quot;&gt;&lt;span class=&quot;n&quot;&gt;RACSignal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;formValid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RACSignal&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;combineLatest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;l&quot;&gt;@[&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firstNameField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rac_textSignal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lastNameField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rac_textSignal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emailField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rac_textSignal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reEmailField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rac_textSignal&lt;/span&gt;
+  &lt;span class=&quot;l&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reEmail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;l&quot;&gt;@(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reEmail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;isEqual&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reEmail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;l&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
+ 
+&lt;span class=&quot;n&quot;&gt;RAC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;createButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;formValid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now whenever the first name, last name, email, or re-enter email fields change, we’ll reduce them down to a boolean indicating whether the form is valid and update the Create button’s enabledness.&lt;/p&gt;
+
+&lt;p&gt;Note that last line of the example. Instead of an assignment that sets the value at one time, it’s actually establishing a &lt;em&gt;relationship&lt;/em&gt;. Instead of assigning it once, we’re assigning it over time. The Create button’s enableness is derived from the form’s validity. The output is a function of the input.&lt;/p&gt;
+
+&lt;p&gt;When the Create is executing, we want to disable the text fields and change their text color to a light gray:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objc&quot; data-lang=&quot;objc&quot;&gt;&lt;span class=&quot;n&quot;&gt;RACSignal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fieldTextColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;executing&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boolValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;lightGrayColor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;UIColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;blackColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
+ 
+&lt;span class=&quot;n&quot;&gt;RAC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firstNameField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;textColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fieldTextColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;RAC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lastNameField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;textColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fieldTextColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;RAC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emailField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;textColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fieldTextColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;RAC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reEmailField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;textColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fieldTextColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ 
+&lt;span class=&quot;n&quot;&gt;RACSignal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;notProcessing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;executing&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;l&quot;&gt;@(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boolValue&lt;/span&gt;&lt;span class=&quot;l&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;RAC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firstNameField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notProcessing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;RAC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lastNameField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notProcessing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;RAC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emailField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notProcessing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;RAC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reEmailField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notProcessing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We can wire the rest of our outputs up similarly. They’re all just combinations or transformations of our inputs.&lt;/p&gt;
+
+&lt;h3 id=&quot;fin&quot;&gt;Fin&lt;/h3&gt;
+
+&lt;p&gt;That’s a small, practical example of the principles of FRP in an imperative language. The whole example view is on GitHub: &lt;a href=&quot;https://github.com/joshaber/RACSignupDemo&quot;&gt;RACSignupDemo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Functional reactive programming offers a way to once again view our programs as simply input and output. We get to minimize state while also embracing a unified view of what our app is doing. It’s all just inputs and outputs.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;This is kinda interesting itself because it means that the “meaningful” part of the app is the bit that combines all the inputs into the output. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;It might be easier to break it down on a per-view basis than thinking of the entire app at each point in time. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;See &lt;a href=&quot;http://shaffner.us/cs/papers/tarpit.pdf&quot;&gt;“Out of the Tar Pit”&lt;/a&gt; &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot;&gt;
+      &lt;p&gt;Most state is introduced simply used because it’s an easy solution to a problem or because it’s how we’re trained to solve problems—not because it’s intrinsic to the problem at hand. &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:5&quot;&gt;
+      &lt;p&gt;Don’t hate. &lt;a href=&quot;#fnref:5&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:6&quot;&gt;
+      &lt;p&gt;Which sounds a lot like futures. Time-varying values are a higher-level concept that encompasses futures. &lt;a href=&quot;#fnref:6&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:7&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://james-iry.blogspot.com/2009/05/brief-incomplete-and-mostly-wrong.html&quot;&gt;Until you reach the turtles&lt;/a&gt;. &lt;a href=&quot;#fnref:7&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+
+</feed>
