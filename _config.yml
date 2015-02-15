@@ -13,7 +13,7 @@ title:               joshaber
 tagline:             'pretty damn pretentious'
 description:         ''
 url:                 http://joshaber.github.io
-baseurl:             http://joshaber.github.io
+baseurl:             /
 paginate:            5
 
 # About/contact
